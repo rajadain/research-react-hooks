@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
 
 import { useAuth } from '../hooks/useAuth';
@@ -16,6 +16,12 @@ export default function Login() {
     const auth = useAuth();
     const { replace, location } = useRouter();
     const { from } = location.state || { from: { pathname: '/projects' } };
+
+    useEffect(() => {
+        if (auth.user && !auth.user.guest) {
+            replace(from);
+        }
+    }, [from, replace, auth]);
 
     const onFinish = async ({ username, password }) => {
         await auth.signin(username, password);
