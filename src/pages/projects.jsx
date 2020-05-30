@@ -29,6 +29,16 @@ export default function Projects() {
     return params?.projectId ? (
         <Card key={data.id} title={data.name}>
             {data.area_of_interest_name}
+            {data.scenarios.map(scenario => (
+                <Card
+                    type='inner'
+                    key={scenario.id}
+                    title={scenario.name}
+                    style={{ marginTop: '16px' }}
+                >
+                    <p>Weather Type: {scenario.weather_type}</p>
+                </Card>
+            ))}
         </Card>
     ) : (
         data.map(project => (
