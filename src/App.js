@@ -16,7 +16,7 @@ function App() {
                         <Route path='/projects'>
                             <Projects />
                         </Route>
-                        <Route path='/'>
+                        <Route path={['/login', '/']}>
                             <Login />
                         </Route>
                     </Switch>
