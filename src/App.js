@@ -5,6 +5,7 @@ import './App.css';
 
 import { ProvideAuth } from './hooks/useAuth';
 import Login from './pages/login';
+import Projects from './pages/projects';
 
 function App() {
     return (
@@ -12,6 +13,9 @@ function App() {
             <div className='App'>
                 <Router>
                     <Switch>
+                        <Route path='/projects'>
+                            <Projects />
+                        </Route>
                         <Route path='/'>
                             <Login />
                         </Route>

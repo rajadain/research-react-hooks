@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 
 import { useAuth } from '../hooks/useAuth';
+import { useRouter } from '../hooks/useRouter';
 
 const layout = {
     labelCol: { span: 8 },
@@ -13,10 +14,11 @@ const tailLayout = {
 
 export default function Login() {
     const auth = useAuth();
+    const router = useRouter();
 
     const onFinish = async ({ username, password }) => {
-        const user = await auth.signin(username, password);
-        console.log(user);
+        await auth.signin(username, password);
+        router.push('/projects');
     };
 
     const onFinishFailed = errorInfo => {
