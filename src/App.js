@@ -6,7 +6,7 @@ import './App.css';
 import AuthenticatedRoute from './components/auth/AuthenticatedRoute';
 import { ProvideAuth } from './hooks/useAuth';
 import Login from './pages/login';
-import Projects from './pages/projects/index';
+import Projects from './pages/projects';
 
 function App() {
     return (
@@ -14,7 +14,9 @@ function App() {
             <div className='App'>
                 <Router>
                     <Switch>
-                        <AuthenticatedRoute path='/projects'>
+                        <AuthenticatedRoute
+                            path={['/projects/:projectId', '/projects']}
+                        >
                             <Projects />
                         </AuthenticatedRoute>
                         <Route path={['/login', '/']}>
