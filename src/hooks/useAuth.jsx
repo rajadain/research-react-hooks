@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import axios from 'axios';
 
+import { URLS } from '../constants';
+
 const authCtx = createContext();
 
 export function ProvideAuth({ children }) {
@@ -25,34 +27,33 @@ function useProvideAuth() {
 
         return axios({
             method: 'post',
-            url: 'https://staging.modelmywatershed.org/user/login',
+            url: URLS.LOGIN,
             data: formData,
             headers: { 'Content-Type': 'multipart/form-data' },
-        }).then(({ data }) => {
-            setUser(data);
-            return data;
-        });
+        })
+            .then(({ data }) => {
+                setUser(data);
+                return data;
+            })
+            .catch(() => {
+                setUser(false);
+            });
     };
 
-    const signout = () =>
-        axios
-            .get('https://staging.modelmywatershed.org/user/logout')
-            .then(() => setUser(false));
+    const signout = () => axios.get(URLS.LOGOUT).then(() => setUser(false));
 
     // Subscribe to user on mount
     // Because this sets state in the callback it will cause any ...
     // ... component that utilizes this hook to re-render with the ...
     // ... latest auth object.
     useEffect(() => {
-        const unsubscribe = axios
-            .get('https://staging.modelmywatershed.org/user/login')
-            .then(({ data }) => {
-                if (!data.guest) {
-                    setUser(data);
-                } else {
-                    setUser(false);
-                }
-            });
+        const unsubscribe = axios.get(URLS.LOGIN).then(({ data }) => {
+            if (!data.guest) {
+                setUser(data);
+            } else {
+                setUser(false);
+            }
+        });
 
         // Cleanup subscription on unmount
         return () => unsubscribe();
