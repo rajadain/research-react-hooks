@@ -14,11 +14,12 @@ const tailLayout = {
 
 export default function Login() {
     const auth = useAuth();
-    const router = useRouter();
+    const { replace, location } = useRouter();
+    const { from } = location.state || { from: { pathname: '/projects' } };
 
     const onFinish = async ({ username, password }) => {
         await auth.signin(username, password);
-        router.push('/projects');
+        replace(from);
     };
 
     const onFinishFailed = errorInfo => {

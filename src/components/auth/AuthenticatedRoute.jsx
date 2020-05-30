@@ -9,9 +9,21 @@ import { useAuth } from '../../hooks/useAuth';
 export default function AuthenticatedRoute({ children, ...props }) {
     const auth = useAuth();
 
-    return auth.user ? (
-        <Route {...props}>{children}</Route>
-    ) : (
-        <Redirect to='/login' />
+    return (
+        <Route
+            {...props}
+            render={({ location }) =>
+                auth.user ? (
+                    children
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: '/login',
+                            state: { from: location },
+                        }}
+                    />
+                )
+            }
+        />
     );
 }
