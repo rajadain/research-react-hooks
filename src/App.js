@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
+import AuthenticatedRoute from './components/auth/AuthenticatedRoute';
 import { ProvideAuth } from './hooks/useAuth';
 import Login from './pages/login';
 import Projects from './pages/projects';
@@ -13,9 +14,9 @@ function App() {
             <div className='App'>
                 <Router>
                     <Switch>
-                        <Route path='/projects'>
+                        <AuthenticatedRoute path='/projects'>
                             <Projects />
-                        </Route>
+                        </AuthenticatedRoute>
                         <Route path={['/login', '/']}>
                             <Login />
                         </Route>
