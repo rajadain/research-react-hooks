@@ -6,7 +6,7 @@ import './App.css';
 import AuthenticatedRoute from './components/auth/AuthenticatedRoute';
 import { ProvideAuth } from './hooks/useAuth';
 import Login from './pages/login';
-import Projects from './pages/projects';
+import Projects from './pages/projects/index';
 
 function App() {
     return (
