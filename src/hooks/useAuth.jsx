@@ -30,6 +30,8 @@ function useProvideAuth() {
             url: URLS.LOGIN,
             data: formData,
             headers: { 'Content-Type': 'multipart/form-data' },
+            // Don't send existing credentials, we want new ones
+            withCredentials: false,
         })
             .then(({ data }) => {
                 setUser(data);
@@ -47,16 +49,13 @@ function useProvideAuth() {
     // ... component that utilizes this hook to re-render with the ...
     // ... latest auth object.
     useEffect(() => {
-        const unsubscribe = axios.get(URLS.LOGIN).then(({ data }) => {
+        axios.get(URLS.LOGIN).then(({ data }) => {
             if (!data.guest) {
                 setUser(data);
             } else {
                 setUser(false);
             }
         });
-
-        // Cleanup subscription on unmount
-        return () => unsubscribe();
     }, []);
 
     // Return the user object and auth methods
