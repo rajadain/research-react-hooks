@@ -1,4 +1,4 @@
-const API_URL = 'http://72e168b90f6a.ngrok.io';
+const API_URL = 'http://67d7fc1a296c.ngrok.io';
 
 export const URLS = Object.freeze({
     API: API_URL,
