@@ -1,9 +1,34 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Button, Card } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
+import axios from 'axios';
 
-export default function ListingCard({ project }) {
+import { URLS } from '../../constants';
+
+export default function ListingCard({ project, mutate }) {
+    const onProjectEdit = () => {
+        const newName = window.prompt('Edit Project Name', project.name);
+        const newProj = {
+            ...project,
+            name: newName,
+        };
+        axios.put(`${URLS.PROJECTS}${project.id}`, newProj);
+        mutate(newProj);
+    };
+
     return (
-        <Card key={project.id} title={project.name}>
+        <Card
+            key={project.id}
+            title={project.name}
+            extra={
+                <Button
+                    type='dashed'
+                    shape='round'
+                    icon={<EditOutlined />}
+                    onClick={onProjectEdit}
+                />
+            }
+        >
             {project.area_of_interest_name}
             {project.scenarios.map(scenario => (
                 <Card

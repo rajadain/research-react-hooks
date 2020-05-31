@@ -13,7 +13,7 @@ export default function Projects() {
     const url = params?.projectId
         ? `${URLS.PROJECTS}${params.projectId}`
         : URLS.PROJECTS;
-    const { data, error } = useSWR(url, async () => {
+    const { data, error, mutate } = useSWR(url, async () => {
         const { data } = await axios.get(url);
         return data;
     });
@@ -27,7 +27,7 @@ export default function Projects() {
     }
 
     return params?.projectId ? (
-        <DetailCard project={data} />
+        <DetailCard project={data} mutate={mutate} />
     ) : (
         data.map(project => <ListingCard key={project.id} project={project} />)
     );
