@@ -4,6 +4,8 @@ import { useAuth } from '../../hooks/useAuth';
 
 /** Modeled after
  *  https://tylermcginnis.com/react-router-protected-routes-authentication/
+ *  with refinements from
+ *  https://reacttraining.com/react-router/web/example/auth-workflow
  */
 
 export default function AuthenticatedRoute({ children, ...props }) {
