@@ -1,3 +1,7 @@
+# 2020-05-31
+
+Much of the frustration of this work is because of ever-more stringent rules around cross-site access, with CSRF Tokens and Cookie Policies, that make it very difficult to work off the MMW API. Even when I'm running a more lax version on my own computer, there are too many obstacles to allow for writing data, which is an important test.
+
 # 2020-05-30
 
 While SWR seems promising, it has a few built-in behaviors that may prove unexpected, and may need to be finessed for our applications. For example, [focus revalidation](https://swr.now.sh/#focus-revalidation), [refetch on interval](https://swr.now.sh/#refetch-on-interval), or error retry.
